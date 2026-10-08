@@ -45,9 +45,18 @@ $$
 At each exercise date, the algorithm compares the **immediate payoff** with the **continuation value**:
 
 $$
-V(t,S_t)=\max\big\{h(S_t),\;C(t,S_t)\big\},
-\qquad
-C(t,S_t)=\mathbb{E}^{\mathbb Q}\!\left[e^{-r\Delta t}V(t+\Delta t,S_{t+\Delta t})\mid S_t\right].
+V(t,S_t) = \max\left\{
+h(S_t), C(t,S_t)
+\right\}
+$$
+
+$$
+C(t,S_t) =
+\mathbb{E}^{\mathbb{Q}}
+\left[
+e^{-r\Delta t} V(t+\Delta t,S_{t+\Delta t})
+\mid S_t
+\right]
 $$
 
 LSMC approximates \(C(t,S_t)\) by regressing discounted future cash flows on basis functions of the current simulated stock prices, proceeding **backward from maturity**. The exercise decision is then made path by path.
