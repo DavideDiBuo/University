@@ -26,14 +26,14 @@ This research studies how accurately and efficiently the Longstaff–Schwartz al
 
 ## Mathematical framework
 
-For an American option with exercise payoff \(h(S_\tau)\), the arbitrage-free value is written as
+For an American option with exercise payoff $h(S_\tau)$, the arbitrage-free value is written as
 
 $$
 V_t = \sup_{\tau\in\mathcal{T}_{t,T}}
-\mathbb{E}^{\mathbb{Q}}\!\left[e^{-r(\tau-t)}h(S_\tau)\mid\mathcal{F}_t\right],
+\mathbb{E}^{\mathbb{Q}}\left[e^{-r(\tau-t)}h(S_\tau)\mid\mathcal{F}_t\right],
 $$
 
-where \(\tau\) is an admissible exercise time and \(\mathbb{Q}\) is the risk-neutral measure.
+where $\tau$ is an admissible exercise time and $\mathbb{Q}$ is the risk-neutral measure.
 
 Under the geometric Brownian motion model, the simulated underlying evolves according to
 
@@ -45,21 +45,16 @@ $$
 At each exercise date, the algorithm compares the **immediate payoff** with the **continuation value**:
 
 $$
-V(t,S_t) = \max\left\{
-h(S_t), C(t,S_t)
-\right\}
+V(t,S_t) = \max\{h(S_t), C(t,S_t)\}
 $$
 
+The continuation value is the expected discounted future value of keeping the option alive:
+
 $$
-C(t,S_t) =
-\mathbb{E}^{\mathbb{Q}}
-\left[
-e^{-r\Delta t} V(t+\Delta t,S_{t+\Delta t})
-\mid S_t
-\right]
+C(t,S_t) = \mathbb{E}^{\mathbb{Q}}\left[e^{-r\Delta t}V(t+\Delta t,S_{t+\Delta t})\mid S_t\right]
 $$
 
-LSMC approximates \(C(t,S_t)\) by regressing discounted future cash flows on basis functions of the current simulated stock prices, proceeding **backward from maturity**. The exercise decision is then made path by path.
+LSMC approximates $C(t,S_t)$ by regressing discounted future cash flows on basis functions of the current simulated stock prices, proceeding **backward from maturity**. The exercise decision is then made path by path.
 
 ## Numerical methods
 
